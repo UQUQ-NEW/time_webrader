@@ -140,12 +140,13 @@
   <div class="panel">
     <div class="panel-title">图层</div>
     <div class="layer-grid">
-      <div class="layer-row" style="position:relative" onclick="toggleBoxCfg()"><span class="layer-lbl"><span class="ldot" style="background:#C8A060"></span>盒子筛选 ⚙</span><div class="box-cfg-pop" id="boxCfgPop"><label class="box-chk-row"><input type="checkbox" id="chkPlayerBox" checked onchange="onBoxFilterChange()"><span style="color:#C8A060">玩家盒子</span></label><label class="box-chk-row"><input type="checkbox" id="chkAIBox" onchange="onBoxFilterChange()"><span style="color:#808080">人机盒子</span></label></div></div>
       <div class="layer-row" onclick="toggleLayer('enemy')"><span class="layer-lbl"><span class="ldot" style="background:#FF453A"></span>敌方</span><div class="ltog on" id="ltog-enemy"></div></div>
       <div class="layer-row" onclick="toggleLayer('box')"><span class="layer-lbl"><span class="ldot" style="background:#C8A060"></span>盒子</span><div class="ltog on" id="ltog-box"></div></div>
       <div class="layer-row" onclick="toggleLayer('ai')"><span class="layer-lbl"><span class="ldot" style="background:#636366"></span>人机</span><div class="ltog" id="ltog-ai"></div></div>
       <div class="layer-row" onclick="toggleLayer('item')"><span class="layer-lbl"><span class="ldot" style="background:#BF5AF2"></span>物品</span><div class="ltog on" id="ltog-item"></div></div>
     </div>
+    <div class="panel-title player-info-title">盒子筛选</div>
+    <label class="player-info-option"><input type="checkbox" id="hideLootedPlayerBoxes" onchange="setHideLootedPlayerBoxes(this.checked)"><span>过滤已搜刮玩家盒</span></label>
     <div class="panel-title player-info-title">人物信息</div>
     <div class="layer-grid" aria-label="人物信息">
       <label class="player-info-option"><input type="checkbox" id="player-info-hero" checked onchange="setPlayerInfo('hero', this.checked)"><span>干员</span></label>
@@ -206,9 +207,9 @@
 <script src="vendor/leaflet/leaflet.js"></script>
 <!-- 模块化 JS（按依赖顺序加载） -->
 <script src="js/mapConfig.js?v=6"></script>
-<script src="js/ui.js?v=9"></script>
+<script src="js/ui.js?v=10"></script>
 <script src="js/mapEngine.js?v=6"></script>
-<script src="js/canvasRenderer.js?v=11"></script>
+<script src="js/canvasRenderer.js?v=12"></script>
 <script src="js/wsClient.js?v=6"></script>
 <script src="js/main.js?v=8"></script>
 </body>
