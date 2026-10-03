@@ -1,0 +1,13 @@
+{
+  "source": "https://df.qq.com/cp/a20240729directory/",
+  "tile_pattern": "https://game.gtimg.cn/images/dfm/cp/a20240729directory/img/map_az3/{z}_{x}_{y}.jpg",
+  "levels": [
+    3,
+    4
+  ],
+  "counts": {
+    "cached": 304,
+    "saved": 16
+  },
+  "missing_or_failed": []
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>网页雷达 · 房间连接</title>
+  <meta name="description" content="输入房间号，连接实时战场数据。">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="login.css?v=2">
+  <script src="time-config.js"></script>
+  <style>
+    html, body { margin: 0; min-height: 100%; }
+    * { box-sizing: border-box; }
+  </style>
+</head>
+<body>
+  <div class="bg-container" aria-hidden="true"></div>
+  <main class="landing-overlay">
+    <div class="landing-card" id="landingCard">
+      <div class="landing-brand">
+        <div class="logo-box" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="8"></circle>
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M12 4v3M20 12h-3M12 20v-3M4 12h3"></path>
+          </svg>
+        </div>
+        <span>网页雷达</span>
+      </div>
+      <div class="landing-heading">
+        <span class="landing-eyebrow">实时战场数据</span>
+        <h1 class="landing-title">连接房间</h1>
+        <p class="landing-desc">输入房间号，系统会自动查找可用的中继节点。</p>
+      </div>
+      <label class="field-label" for="landingKey">房间号</label>
+      <div class="input-wrap">
+        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="14" rx="3"></rect>
+          <path d="M7 10h10M7 14h5"></path>
+        </svg>
+        <input type="text" class="landing-input" id="landingKey" placeholder="请输入 4 位房间号" inputmode="numeric" maxlength="4" pattern="[1-9][0-9]{3}" autocomplete="off" spellcheck="false" aria-describedby="roomHelp errorMsg">
+      </div>
+      <p class="field-help" id="roomHelp">请先让数据源连接到任一中继服务器</p>
+      <button class="landing-btn" id="landingBtn" type="button">
+        <span class="btn-text">进入雷达</span>
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+      <p class="error-msg" id="errorMsg" role="alert" aria-live="polite" style="opacity:0"></p>
+      <p class="landing-hint">多节点自动匹配</p>
+    </div>
+  </main>
+  <script>
+    const roomErrors = {
+      errEmpty: '请输入房间号',
+      errFormat: '请输入 4 位数字房间号',
+      errTimeout: '连接超时，请稍后重试',
+      errInvalid: '未找到该房间，请确认房间号和数据源状态',
+      errNet: '暂时无法连接中继服务器',
+      errConfig: '尚未配置中继服务器'
+    };
+    const input = document.getElementById('landingKey');
+    const button = document.getElementById('landingBtn');
+    const error = document.getElementById('errorMsg');
+
+    function showError(key) {
+      error.textContent = roomErrors[key] || roomErrors.errNet;
+      error.style.opacity = '1';
+      input.setAttribute('aria-invalid', 'true');
+      button.classList.remove('btn-loading');
+    }
+
+    async function goRadar() {
+      if (button.classList.contains('btn-loading')) return;
+      const key = input.value.trim();
+      if (!key) { showError('errEmpty'); input.focus(); return; }
+      if (!/^[1-9][0-9]{3}$/.test(key)) { showError('errFormat'); input.focus(); return; }
+      error.style.opacity = '0';
+      input.removeAttribute('aria-invalid');
+      button.classList.add('btn-loading');
+      const result = await findRoomTIME(key);
+      if (result.url) {
+        try { localStorage.setItem('lastRoomKey', key); } catch (_) {}
+        location.href = 'index.html?key=' + encodeURIComponent(key);
+      } else {
+        showError(result.reason === 'config' ? 'errConfig' : result.reason === 'timeout' ? 'errTimeout' : result.reason === 'invalid' ? 'errInvalid' : 'errNet');
+      }
+    }
+
+    button.addEventListener('click', goRadar);
+    input.addEventListener('keydown', event => { if (event.key === 'Enter') goRadar(); });
+    try {
+      const saved = localStorage.getItem('lastRoomKey');
+      if (saved) input.value = saved;
+    } catch (_) {}
+    input.focus();
+  </script>
+</body>
+</html>
