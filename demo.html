@@ -284,16 +284,25 @@
     </div>
     <div class="panel-title player-info-title">盒子筛选</div>
     <label class="player-info-option"><input type="checkbox" id="hideLootedPlayerBoxes" onchange="setHideLootedPlayerBoxes(this.checked)"><span>过滤已搜刮玩家盒</span></label>
-    <div class="panel-title player-info-title">人物信息</div>
-    <div class="layer-grid" aria-label="人物信息">
-      <label class="player-info-option"><input type="checkbox" id="player-info-hero" checked onchange="setPlayerInfo('hero', this.checked)"><span>干员</span></label>
-      <label class="player-info-option"><input type="checkbox" id="player-info-name" checked onchange="setPlayerInfo('name', this.checked)"><span>名字</span></label>
-      <label class="player-info-option"><input type="checkbox" id="player-info-helmet" checked onchange="setPlayerInfo('helmet', this.checked)"><span>头盔</span></label>
-      <label class="player-info-option"><input type="checkbox" id="player-info-armor" checked onchange="setPlayerInfo('armor', this.checked)"><span>护甲</span></label>
-      <label class="player-info-option"><input type="checkbox" id="player-info-avatar" checked onchange="setPlayerInfo('avatar', this.checked)"><span>头像</span></label>
-      <label class="player-info-option"><input type="checkbox" id="player-info-direction" checked onchange="setPlayerInfo('direction', this.checked)"><span>朝向</span></label>
-      <label class="player-info-option"><input type="checkbox" id="player-info-weapon" onchange="setPlayerInfo('weapon', this.checked)"><span>武器</span></label>
-      <label class="player-info-option"><input type="checkbox" id="player-info-distance" onchange="setPlayerInfo('distance', this.checked)"><span>距离</span></label>
+    <div class="panel-title player-info-title">真人信息</div>
+    <div class="layer-grid" aria-label="真人信息">
+      <label class="player-info-option"><input type="checkbox" id="human-info-hero" checked onchange="setPlayerInfo('human', 'hero', this.checked)"><span>干员</span></label>
+      <label class="player-info-option"><input type="checkbox" id="human-info-name" checked onchange="setPlayerInfo('human', 'name', this.checked)"><span>名字</span></label>
+      <label class="player-info-option"><input type="checkbox" id="human-info-helmet" checked onchange="setPlayerInfo('human', 'helmet', this.checked)"><span>头盔</span></label>
+      <label class="player-info-option"><input type="checkbox" id="human-info-armor" checked onchange="setPlayerInfo('human', 'armor', this.checked)"><span>护甲</span></label>
+      <label class="player-info-option"><input type="checkbox" id="human-info-avatar" checked onchange="setPlayerInfo('human', 'avatar', this.checked)"><span>头像</span></label>
+      <label class="player-info-option"><input type="checkbox" id="human-info-direction" checked onchange="setPlayerInfo('human', 'direction', this.checked)"><span>朝向</span></label>
+      <label class="player-info-option"><input type="checkbox" id="human-info-weapon" checked onchange="setPlayerInfo('human', 'weapon', this.checked)"><span>武器</span></label>
+      <label class="player-info-option"><input type="checkbox" id="human-info-distance" checked onchange="setPlayerInfo('human', 'distance', this.checked)"><span>距离</span></label>
+    </div>
+    <div class="panel-title player-info-title">人机信息</div>
+    <div class="layer-grid" aria-label="人机信息">
+      <label class="player-info-option"><input type="checkbox" id="ai-info-name" checked onchange="setPlayerInfo('ai', 'name', this.checked)"><span>名字</span></label>
+      <label class="player-info-option"><input type="checkbox" id="ai-info-avatar" checked onchange="setPlayerInfo('ai', 'avatar', this.checked)"><span>标记</span></label>
+      <label class="player-info-option"><input type="checkbox" id="ai-info-helmet" onchange="setPlayerInfo('ai', 'helmet', this.checked)"><span>头盔</span></label>
+      <label class="player-info-option"><input type="checkbox" id="ai-info-armor" onchange="setPlayerInfo('ai', 'armor', this.checked)"><span>护甲</span></label>
+      <label class="player-info-option"><input type="checkbox" id="ai-info-weapon" onchange="setPlayerInfo('ai', 'weapon', this.checked)"><span>武器</span></label>
+      <label class="player-info-option"><input type="checkbox" id="ai-info-distance" checked onchange="setPlayerInfo('ai', 'distance', this.checked)"><span>距离</span></label>
     </div>
     <div class="scale-row">
       <span class="cfg-lbl">全局</span>
@@ -338,11 +347,11 @@
 <script src="vendor/leaflet/leaflet.js"></script>
 <!-- 模块化 JS（按依赖顺序加载） -->
 <script src="js/mapConfig.js?v=6"></script>
-<script src="js/ui.js?v=10"></script>
+<script src="js/ui.js?v=11"></script>
 <script src="js/mapEngine.js?v=4"></script>
-<script src="js/canvasRenderer.js?v=13"></script>
+<script src="js/canvasRenderer.js?v=14"></script>
 <script src="js/wsClient.js?v=4"></script>
-<script src="js/demo.js?v=6"></script>
+<script src="js/demo.js?v=7"></script>
 <script src="js/main.js?v=8"></script>
 </body>
 </html>
