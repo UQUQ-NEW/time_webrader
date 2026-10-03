@@ -142,7 +142,7 @@
     }
   </style>
   <link rel="stylesheet" href="login.css?v=2">
-  <link rel="stylesheet" href="element-theme.css?v=4">
+  <link rel="stylesheet" href="element-theme.css?v=5">
 </head>
 <body>
 
@@ -282,10 +282,21 @@
       <div class="layer-row" onclick="toggleLayer('ai')"><span class="layer-lbl"><span class="ldot" style="background:#636366"></span>人机</span><div class="ltog" id="ltog-ai"></div></div>
       <div class="layer-row" onclick="toggleLayer('item')"><span class="layer-lbl"><span class="ldot" style="background:#BF5AF2"></span>物品</span><div class="ltog on" id="ltog-item"></div></div>
     </div>
+    <div class="panel-title player-info-title">人物信息</div>
+    <div class="layer-grid" aria-label="人物信息">
+      <label class="player-info-option"><input type="checkbox" id="player-info-hero" checked onchange="setPlayerInfo('hero', this.checked)"><span>干员</span></label>
+      <label class="player-info-option"><input type="checkbox" id="player-info-name" checked onchange="setPlayerInfo('name', this.checked)"><span>名字</span></label>
+      <label class="player-info-option"><input type="checkbox" id="player-info-helmet" checked onchange="setPlayerInfo('helmet', this.checked)"><span>头盔</span></label>
+      <label class="player-info-option"><input type="checkbox" id="player-info-armor" checked onchange="setPlayerInfo('armor', this.checked)"><span>护甲</span></label>
+      <label class="player-info-option"><input type="checkbox" id="player-info-avatar" checked onchange="setPlayerInfo('avatar', this.checked)"><span>头像</span></label>
+      <label class="player-info-option"><input type="checkbox" id="player-info-direction" checked onchange="setPlayerInfo('direction', this.checked)"><span>朝向</span></label>
+      <label class="player-info-option"><input type="checkbox" id="player-info-weapon" onchange="setPlayerInfo('weapon', this.checked)"><span>武器</span></label>
+      <label class="player-info-option"><input type="checkbox" id="player-info-distance" onchange="setPlayerInfo('distance', this.checked)"><span>距离</span></label>
+    </div>
     <div class="scale-row">
       <span class="cfg-lbl">全局</span>
-      <input type="range" class="scale-slider" id="markerScale" min="0.5" max="2" step="0.1" value="1.3" oninput="setMarkerScale(this.value)">
-      <span class="scale-val" id="scaleVal">1.3</span>
+      <input type="range" class="scale-slider" id="markerScale" min="0.5" max="2" step="0.1" value="1.0" oninput="setMarkerScale(this.value)">
+      <span class="scale-val" id="scaleVal">1.0</span>
     </div>
     <div class="scale-row">
       <span class="cfg-lbl">字体</span>
@@ -325,9 +336,9 @@
 <script src="vendor/leaflet/leaflet.js"></script>
 <!-- 模块化 JS（按依赖顺序加载） -->
 <script src="js/mapConfig.js?v=6"></script>
-<script src="js/ui.js?v=8"></script>
+<script src="js/ui.js?v=9"></script>
 <script src="js/mapEngine.js?v=4"></script>
-<script src="js/canvasRenderer.js?v=10"></script>
+<script src="js/canvasRenderer.js?v=11"></script>
 <script src="js/wsClient.js?v=4"></script>
 <script src="js/demo.js?v=5"></script>
 <script src="js/main.js?v=8"></script>
