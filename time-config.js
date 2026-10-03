@@ -26,12 +26,16 @@ function findRoomTIME(key, timeoutMs = 5000) {
     let remaining = urls.length;
     let sawReply = false;
     let settled = false;
-    const timer = setTimeout(() => finish({ url: null, reason: sawReply ? 'invalid' : 'timeout' }), timeoutMs);
+    let foundUrl = null;
+    let graceTimer = null;
+    const timer = setTimeout(() => finish(foundUrl ? { url: foundUrl } :
+      { url: null, reason: sawReply ? 'invalid' : 'timeout' }), timeoutMs);
 
     function finish(result) {
       if (settled) return;
       settled = true;
       clearTimeout(timer);
+      clearTimeout(graceTimer);
       for (const socket of sockets) {
         try { socket.close(); } catch (_) {}
       }
@@ -44,7 +48,8 @@ function findRoomTIME(key, timeoutMs = 5000) {
       const fail = () => {
         if (done || settled) return;
         done = true;
-        if (--remaining === 0) finish({ url: null, reason: sawReply ? 'invalid' : 'network' });
+        if (--remaining === 0) finish(foundUrl ? { url: foundUrl } :
+          { url: null, reason: sawReply ? 'invalid' : 'network' });
       };
       try {
         socket = new WebSocket(url);
@@ -58,8 +63,17 @@ function findRoomTIME(key, timeoutMs = 5000) {
           try {
             const reply = JSON.parse(event.data);
             sawReply = true;
-            if (reply.ok && reply.pub) finish({ url });
-            else fail();
+            if (reply.ok && reply.pub) {
+              done = true;
+              --remaining;
+              if (foundUrl && foundUrl !== url) {
+                finish({ url: null, reason: 'collision' });
+              } else {
+                foundUrl = url;
+                if (remaining === 0) finish({ url });
+                else if (!graceTimer) graceTimer = setTimeout(() => finish({ url: foundUrl }), 500);
+              }
+            } else fail();
           } catch (_) { fail(); }
         };
         socket.onerror = fail;

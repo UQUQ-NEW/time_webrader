@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="styles.css?v=4">
   <link rel="stylesheet" href="login.css?v=2">
   <script>if(location.protocol==='https:'&&location.hostname==='uquq-new.github.io')location.replace('http://timee.now.cc'+location.pathname.replace(/^\/time_webrader(?=\/|$)/i,'')+location.search+location.hash);</script>
-  <script src="time-config.js?v=5"></script>
+  <script src="time-config.js?v=6"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     * { box-sizing: border-box; }
@@ -62,7 +62,8 @@
       errInvalid: '未找到该房间，请确认房间号和数据源状态',
       errNet: '暂时无法连接中继服务器',
       errConfig: '尚未配置中继服务器',
-      errHttps: '当前 HTTPS 页面无法连接 WS，请打开 http://timee.now.cc'
+      errHttps: '当前 HTTPS 页面无法连接 WS，请打开 http://timee.now.cc',
+      errCollision: '房间号在多个服务器重复，请重新开启共享生成新房间'
     };
     const input = document.getElementById('landingKey');
     const button = document.getElementById('landingBtn');
@@ -88,7 +89,7 @@
         try { localStorage.setItem('lastRoomKey', key); } catch (_) {}
         location.href = 'index.html?key=' + encodeURIComponent(key);
       } else {
-        showError(result.reason === 'config' ? 'errConfig' : result.reason === 'https' ? 'errHttps' : result.reason === 'timeout' ? 'errTimeout' : result.reason === 'invalid' ? 'errInvalid' : 'errNet');
+        showError(result.reason === 'config' ? 'errConfig' : result.reason === 'https' ? 'errHttps' : result.reason === 'collision' ? 'errCollision' : result.reason === 'timeout' ? 'errTimeout' : result.reason === 'invalid' ? 'errInvalid' : 'errNet');
       }
     }
 
