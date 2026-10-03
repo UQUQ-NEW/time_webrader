@@ -23,7 +23,8 @@
   <meta name="twitter:title" content="网页雷达">
   <meta name="twitter:description" content="网页雷达提供房间连接与实时地图查看。">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <script src="time-config.js"></script>
+  <script>if(location.protocol==='https:'&&location.hostname==='uquq-new.github.io')location.replace('http://timee.now.cc'+location.pathname.replace(/^\/time_webrader(?=\/|$)/i,'')+location.search+location.hash);</script>
+  <script src="time-config.js?v=5"></script>
   <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="styles.css?v=4">
   <style>
@@ -178,7 +179,7 @@
         <rect x="3" y="5" width="18" height="14" rx="3"></rect>
         <path d="M7 10h10M7 14h5"></path>
       </svg>
-      <input type="text" class="landing-input" id="landingKey" placeholder="请输入 4 位房间号" inputmode="numeric" maxlength="4" pattern="[1-9][0-9]{3}" autocomplete="off" spellcheck="false" aria-describedby="roomHelp landingError" onkeydown="if(event.key==='Enter') goRadar()">
+      <input type="text" class="landing-input" id="landingKey" placeholder="请输入 4 到 6 位房间号" inputmode="numeric" maxlength="6" pattern="[1-9][0-9]{3,5}" autocomplete="off" spellcheck="false" aria-describedby="roomHelp landingError" onkeydown="if(event.key==='Enter') goRadar()">
     </div>
 
     <button class="landing-btn" id="landingBtn" onclick="goRadar()">
@@ -345,8 +346,8 @@
 <script src="js/mapConfig.js?v=6"></script>
 <script src="js/ui.js?v=12"></script>
 <script src="js/mapEngine.js?v=4"></script>
-<script src="js/canvasRenderer.js?v=16"></script>
-<script src="js/wsClient.js?v=5"></script>
-<script src="js/main.js?v=8"></script>
+<script src="js/canvasRenderer.js?v=17"></script>
+<script src="js/wsClient.js?v=6"></script>
+<script src="js/main.js?v=9"></script>
 </body>
 </html>

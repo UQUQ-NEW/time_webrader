@@ -15,9 +15,11 @@ function timeWsUrls() {
 }
 
 function findRoomTIME(key, timeoutMs = 5000) {
-  if (!/^[1-9][0-9]{3}$/.test(key)) return Promise.resolve({ url: null, reason: 'invalid' });
+  if (!/^[1-9][0-9]{3,5}$/.test(key)) return Promise.resolve({ url: null, reason: 'invalid' });
   const urls = timeWsUrls();
-  if (!urls.length) return Promise.resolve({ url: null, reason: 'config' });
+  if (!urls.length) return Promise.resolve({ url: null, reason:
+    location.protocol === 'https:' && window.TIME_WS_URLS?.some(url => /^ws:\/\//i.test(url))
+      ? 'https' : 'config' });
 
   return new Promise(resolve => {
     const sockets = [];
