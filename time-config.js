@@ -1,5 +1,9 @@
 // TIME 服务器的公开 WebSocket 地址。
-window.TIME_WS_URLS = ['ws://cheap-host1.cheapyun.com:31413'];
+window.TIME_WS_URLS = [
+  'ws://cheap-host1.cheapyun.com:31413',
+  'ws://cheap-host1.cheapyun.com:34360',
+  'ws://cheap-host1.cheapyun.com:46319',
+];
 
 function timeWsUrls() {
   const configured = Array.isArray(window.TIME_WS_URLS)
