@@ -24,10 +24,13 @@ function findRoomTIME(key, timeoutMs = 5000) {
   if (!urls.length) return Promise.resolve({ url: null, reason:
     location.protocol === 'https:' && window.TIME_WS_URLS?.some(url => /^ws:\/\//i.test(url))
       ? 'https' : 'config' });
+  // On the three public relays every numeric prefix has one owner.
+  const routed = urls.length === 3
+    ? [urls[(Number(key[0]) - 1) % 3]] : urls;
 
   return new Promise(resolve => {
     const sockets = [];
-    let remaining = urls.length;
+    let remaining = routed.length;
     let sawReply = false;
     let settled = false;
     let foundUrl = null;
@@ -46,7 +49,7 @@ function findRoomTIME(key, timeoutMs = 5000) {
       resolve(result);
     }
 
-    for (const url of urls) {
+    for (const url of routed) {
       let socket;
       let done = false;
       const fail = () => {
